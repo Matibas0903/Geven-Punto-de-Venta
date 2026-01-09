@@ -1,0 +1,14 @@
+# Visual Studio / .NET
+.vs/
+bin/
+obj/
+
+# Ejecutables e instaladores
+*.exe
+*.msi
+setup/
+publish/
+
+# Sistema
+Thumbs.db
+Desktop.ini
