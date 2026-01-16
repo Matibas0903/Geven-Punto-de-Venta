@@ -1,86 +1,121 @@
 ﻿using BE;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using System.Data.SQLite;
+
+
 
 namespace DAL
 {
-    public class ProdutoDAL
+    public class ProductoDAL
     {
-        private conexion Conexion = new conexion();
+        conexion Conexion = new conexion();
 
-        public DataTable ObtenerProductos() 
+        public DataTable ObtenerProductos()
         {
-            return Conexion.LeerPorComando("SELECT * FROM Vista_Productos");
-        }
-        public int AgregarProducto(BE.ProductoBE unProducto)
-        {   // escribe en base de datos un nuevo medicamento
+            DataTable tabla = new DataTable();
 
-            SqlParameter[] parameters = new SqlParameter[]
+            using (SQLiteConnection conn = Conexion.Conectar())
             {
-                new SqlParameter("@nombreProducto", unProducto.Nombre),
-                new SqlParameter("@precioProducto", unProducto.Precio),
-                new SqlParameter("@idProducto", SqlDbType.Int)
-                    {
-                        Direction = ParameterDirection.Output
-                    }
-            };
-            Conexion.EscribirPorStoreProcedure("SP_AgregarProducto", parameters);
-            int idGenerado = Convert.ToInt32(parameters[2].Value);
-            unProducto.ProductoID = idGenerado;
+                string sql = "SELECT * FROM PRODUCTO";
 
-            return idGenerado;
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    tabla.Load(reader);
+                }
+            }
+
+            return tabla;
         }
 
-        public void ActualizarProducto(BE.ProductoBE unProducto, int idProducto)
-        {  
-            SqlParameter[] parameters = new SqlParameter[]
+        public int AgregarProducto(ProductoBE unProducto)
+        {
+            using (SQLiteConnection conn = Conexion.Conectar())
             {
-                new SqlParameter("@IdProducto", idProducto),
-                new SqlParameter("@Nombre", unProducto.Nombre),
-                new SqlParameter("@Precio", unProducto.Precio)      
-            };
-            Conexion.EscribirPorStoreProcedure("SP_ActualizarProducto", parameters);
+                string sql = @"
+            INSERT INTO PRODUCTO (NOMBRE, PRECIO)
+            VALUES (@Nombre, @Precio);
+            SELECT last_insert_rowid();";
+
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Nombre", unProducto.Nombre);
+                    cmd.Parameters.AddWithValue("@Precio", unProducto.Precio);
+
+                    int idGenerado = Convert.ToInt32(cmd.ExecuteScalar());
+                    unProducto.ProductoID = idGenerado;
+
+                    return idGenerado;
+                }
+            }
         }
+
+        public void ActualizarProducto(ProductoBE unProducto)
+        {
+            using (SQLiteConnection conn = Conexion.Conectar())
+            {
+                string sql = @"
+            UPDATE PRODUCTO
+            SET NOMBRE = @Nombre,
+                PRECIO = @Precio
+            WHERE IDPRODUCTO = @IdProducto
+        ";
+
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Nombre", unProducto.Nombre);
+                    cmd.Parameters.AddWithValue("@Precio", unProducto.Precio);
+                    cmd.Parameters.AddWithValue("@IdProducto", unProducto.ProductoID);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
         public void EliminarProducto(int idProducto)
         {
-            SqlParameter[] parametros = new SqlParameter[]
+            using (SQLiteConnection conn = Conexion.Conectar())
             {
-                new SqlParameter("@Producto_Id", idProducto)
-            };
-            Conexion.EscribirPorStoreProcedure("SP_EliminarProducto", parametros);
+                string sql = "DELETE FROM PRODUCTO WHERE IDPRODUCTO = @IdProducto";
 
-        }
-        public ProductoBE ObtenerProductoPorID(int idProducto) 
-        {
-            SqlParameter[] parametros = new SqlParameter[]
-               {
-                    new SqlParameter("@IdProducto", idProducto)
-               };
-
-            var tabla = Conexion.LeerPorStoreProcedure("SP_ObtenerProductoPorID", parametros);//llama al metodo leer por storeprocedure
-
-            if (tabla != null && tabla.Rows.Count > 0)
-            {
-                var fila = tabla.Rows[0];
-
-
-                return new ProductoBE
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
                 {
-                    ProductoID = Convert.ToInt32(fila["IDPRODUCTO"]),
-                    Nombre = fila["NOMBRE"].ToString(),
-                    Precio = float.Parse(fila["PRECIO"].ToString()),
-                  
+                    cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
-                };
-            }//crea un objeto medicamento y lo llena con sus datos
+        public ProductoBE ObtenerProductoPorID(int idProducto)
+        {
+            using (SQLiteConnection conn = Conexion.Conectar())
+            {
+                string sql = "SELECT * FROM PRODUCTO WHERE IDPRODUCTO = @IdProducto";
+
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new ProductoBE
+                            {
+                                ProductoID = Convert.ToInt32(reader["IDPRODUCTO"]),
+                                Nombre = reader["NOMBRE"].ToString(),
+                                Precio = Convert.ToSingle(reader["PRECIO"])
+                            };
+                        }
+                    }
+                }
+            }
             return null;
         }
+
 
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace ProyectoMerceria
 {
     internal static class Program
@@ -35,7 +36,7 @@ namespace ProyectoMerceria
                     return; // Cortar ejecución si falla
                 }
             }
-
+          
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

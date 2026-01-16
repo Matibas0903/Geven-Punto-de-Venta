@@ -1,11 +1,8 @@
 ﻿using BE;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using System.Data.SQLite;
 
 namespace DAL
 {
@@ -13,27 +10,65 @@ namespace DAL
     {
         conexion Conexion = new conexion();
 
+        // ============================
+        // REGISTRAR DETALLE DE VENTA
+        // ============================
         public void RegistrarDetalleVenta(DetalleVentaBE detalleVenta)
         {
-            
-            SqlParameter[] parametros = new SqlParameter[] {
-                new SqlParameter("@VENTA_ID", detalleVenta.VentaID),
-                new SqlParameter("@PRODUCTO_ID", detalleVenta.Producto.ProductoID),
-                new SqlParameter("@Cantidad", detalleVenta.Cantidad),
-                new SqlParameter("@Subtotal", detalleVenta.SubTotal)
-            };
+            using (SQLiteConnection conn = Conexion.Conectar())
+            {
+                string sql = @"
+                    INSERT INTO DETALLE_VENTA
+                    (IDVENTA, IDPRODUCTO, CANTIDAD, SUBTOTAL)
+                    VALUES
+                    (@VentaID, @ProductoID, @Cantidad, @SubTotal)
+                ";
 
-            Conexion.EscribirPorStoreProcedure("SP_RegistrarDetalleVenta", parametros);
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@VentaID", detalleVenta.VentaID);
+                    cmd.Parameters.AddWithValue("@ProductoID", detalleVenta.Producto.ProductoID);
+                    cmd.Parameters.AddWithValue("@Cantidad", detalleVenta.Cantidad);
+                    cmd.Parameters.AddWithValue("@SubTotal", detalleVenta.SubTotal);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
+        // ============================
+        // OBTENER DETALLE DE UNA VENTA
+        // ============================
         public DataTable ObtenerDetalleDeVenta(int idVenta)
         {
-            SqlParameter[] parametros = new SqlParameter[]
-            {
-                new SqlParameter ("@VentaID", idVenta)
-            };
-            return Conexion.LeerPorStoreProcedure("SP_VerDetalleVenta", parametros);
+            DataTable tabla = new DataTable();
 
+            using (SQLiteConnection conn = Conexion.Conectar())
+            {
+                string sql = @"
+                    SELECT 
+                        DV.IDVENTA,
+                        DV.CANTIDAD,
+                        P.NOMBRE AS NOMBRE_PRODUCTO,
+                        DV.SUBTOTAL
+                    FROM DETALLE_VENTA DV
+                    INNER JOIN PRODUCTO P 
+                        ON P.IDPRODUCTO = DV.IDPRODUCTO
+                    WHERE DV.IDVENTA = @VentaID
+                ";
+
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@VentaID", idVenta);
+
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        tabla.Load(reader);
+                    }
+                }
+            }
+
+            return tabla;
         }
     }
 }

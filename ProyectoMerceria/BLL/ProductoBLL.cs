@@ -10,7 +10,7 @@ namespace BLL
 {
     public class ProductoBLL
     {
-        DAL.ProdutoDAL unProductoDAL = new DAL.ProdutoDAL();
+        DAL.ProductoDAL unProductoDAL = new DAL.ProductoDAL();
 
         public List<BE.ProductoBE> ObtenerProductos() 
         {
@@ -37,7 +37,7 @@ namespace BLL
 
         public void ActualizarProducto(BE.ProductoBE unProducto, int idProducto)
         {
-            unProductoDAL.ActualizarProducto(unProducto, idProducto);
+            unProductoDAL.ActualizarProducto(unProducto);
         }
         public void EliminarProducto(int idProducto)
         {

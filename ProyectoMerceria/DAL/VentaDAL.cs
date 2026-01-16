@@ -1,41 +1,67 @@
 ﻿using BE;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SQLite;
+
 
 namespace DAL
 {
     public class VentaDAL
     {
         conexion Conexion = new conexion();
+
+        // ============================
+        // REGISTRAR VENTA
+        // ============================
         public int RegistrarVenta(VentaBE venta)
         {
-            
-            SqlParameter[] parametros = new SqlParameter[] {
-                new SqlParameter("@Metodo_pago", venta.MetodoPagoTexto),
-                new SqlParameter("@Fecha_venta", venta.FechaVenta),
-                new SqlParameter("@Total", venta.Total),
-                new SqlParameter("@Venta_ID", SqlDbType.Int)
-                {Direction = ParameterDirection.Output}
-            };
-           
-            Conexion.EscribirPorStoreProcedure("SP_RegistrarVenta", parametros);
-            int venta_ID = Convert.ToInt32(parametros[3].Value);
-            return venta_ID;
+            using (SQLiteConnection conn = Conexion.Conectar())
+            {
+                string sql = @"
+                    INSERT INTO VENTA (FECHAVENTA, METODO_PAGO, TOTAL)
+                    VALUES (@FechaVenta, @MetodoPago, @Total);
+                    SELECT last_insert_rowid();
+                ";
+
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@FechaVenta", venta.FechaVenta.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("@MetodoPago", venta.MetodoPagoTexto);
+                    cmd.Parameters.AddWithValue("@Total", venta.Total);
+
+                    int ventaID = Convert.ToInt32(cmd.ExecuteScalar());
+                    return ventaID;
+                }
+            }
         }
 
-        public DataTable ObtenerVentaPorFecha(DateTime Fecha) 
+        // ============================
+        // OBTENER VENTAS POR FECHA
+        // ============================
+        public DataTable ObtenerVentaPorFecha(DateTime fecha)
         {
-            SqlParameter[] parametros = new SqlParameter[]
+            DataTable tabla = new DataTable();
+
+            using (SQLiteConnection conn = Conexion.Conectar())
             {
-                new SqlParameter ("@Fecha", Fecha)
-            };
-         return Conexion.LeerPorStoreProcedure("SP_VerVentasPorFecha", parametros);
-         
+                string sql = @"
+                    SELECT IDVENTA, FECHAVENTA, METODO_PAGO, TOTAL
+                    FROM VENTA
+                    WHERE FECHAVENTA = @Fecha
+                ";
+
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Fecha", fecha.ToString("yyyy-MM-dd"));
+
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        tabla.Load(reader);
+                    }
+                }
+            }
+
+            return tabla;
         }
     }
 }
