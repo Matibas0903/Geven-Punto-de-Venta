@@ -66,5 +66,10 @@ namespace ProyectoMerceria
                 MessageBox.Show("No se encontro el form");
             }
         }
+
+        private void UC_DetalleDeVenta_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

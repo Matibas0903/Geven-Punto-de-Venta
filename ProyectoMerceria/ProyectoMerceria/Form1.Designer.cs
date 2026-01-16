@@ -43,25 +43,27 @@
             // 
             // panelContenedor
             // 
-            this.panelContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(121)))), ((int)(((byte)(85)))));
+            this.panelContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
             this.panelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenedor.Location = new System.Drawing.Point(203, 3);
+            this.panelContenedor.Location = new System.Drawing.Point(304, 6);
+            this.panelContenedor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.panelContenedor.Name = "panelContenedor";
-            this.panelContenedor.Size = new System.Drawing.Size(594, 444);
+            this.panelContenedor.Size = new System.Drawing.Size(892, 785);
             this.panelContenedor.TabIndex = 1;
             this.panelContenedor.Resize += new System.EventHandler(this.panelContenedor_Resize);
             // 
             // panelLateral
             // 
-            this.panelLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(95)))), ((int)(((byte)(43)))));
+            this.panelLateral.BackColor = System.Drawing.Color.White;
             this.panelLateral.Controls.Add(this.PictureLaPuntada);
             this.panelLateral.Controls.Add(this.btnAgregarProducto);
             this.panelLateral.Controls.Add(this.btnVentasDiarias);
             this.panelLateral.Controls.Add(this.btnCrearVenta);
             this.panelLateral.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelLateral.Location = new System.Drawing.Point(3, 3);
+            this.panelLateral.Location = new System.Drawing.Point(4, 6);
+            this.panelLateral.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.panelLateral.Name = "panelLateral";
-            this.panelLateral.Size = new System.Drawing.Size(194, 444);
+            this.panelLateral.Size = new System.Drawing.Size(291, 785);
             this.panelLateral.TabIndex = 0;
             this.panelLateral.Resize += new System.EventHandler(this.panelLateral_Resize);
             // 
@@ -69,9 +71,10 @@
             // 
             this.PictureLaPuntada.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.PictureLaPuntada.Image = global::ProyectoMerceria.Properties.Resources.LaPuntadaSinHiloLogo;
-            this.PictureLaPuntada.Location = new System.Drawing.Point(27, 3);
+            this.PictureLaPuntada.Location = new System.Drawing.Point(40, 6);
+            this.PictureLaPuntada.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.PictureLaPuntada.Name = "PictureLaPuntada";
-            this.PictureLaPuntada.Size = new System.Drawing.Size(126, 105);
+            this.PictureLaPuntada.Size = new System.Drawing.Size(189, 185);
             this.PictureLaPuntada.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureLaPuntada.TabIndex = 3;
             this.PictureLaPuntada.TabStop = false;
@@ -79,12 +82,14 @@
             // btnAgregarProducto
             // 
             this.btnAgregarProducto.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnAgregarProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(196)))), ((int)(((byte)(69)))));
+            this.btnAgregarProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(158)))), ((int)(((byte)(11)))));
             this.btnAgregarProducto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAgregarProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregarProducto.Location = new System.Drawing.Point(27, 311);
+            this.btnAgregarProducto.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarProducto.Location = new System.Drawing.Point(40, 551);
+            this.btnAgregarProducto.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnAgregarProducto.Name = "btnAgregarProducto";
-            this.btnAgregarProducto.Size = new System.Drawing.Size(128, 58);
+            this.btnAgregarProducto.Size = new System.Drawing.Size(192, 102);
             this.btnAgregarProducto.TabIndex = 2;
             this.btnAgregarProducto.Text = "Agregar producto";
             this.btnAgregarProducto.UseVisualStyleBackColor = false;
@@ -93,12 +98,14 @@
             // btnVentasDiarias
             // 
             this.btnVentasDiarias.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnVentasDiarias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(196)))), ((int)(((byte)(69)))));
+            this.btnVentasDiarias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(158)))), ((int)(((byte)(11)))));
             this.btnVentasDiarias.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVentasDiarias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVentasDiarias.Location = new System.Drawing.Point(27, 202);
+            this.btnVentasDiarias.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVentasDiarias.Location = new System.Drawing.Point(40, 358);
+            this.btnVentasDiarias.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnVentasDiarias.Name = "btnVentasDiarias";
-            this.btnVentasDiarias.Size = new System.Drawing.Size(128, 58);
+            this.btnVentasDiarias.Size = new System.Drawing.Size(192, 102);
             this.btnVentasDiarias.TabIndex = 1;
             this.btnVentasDiarias.Text = "Ver ventas diarias";
             this.btnVentasDiarias.UseVisualStyleBackColor = false;
@@ -107,12 +114,14 @@
             // btnCrearVenta
             // 
             this.btnCrearVenta.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCrearVenta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(196)))), ((int)(((byte)(69)))));
+            this.btnCrearVenta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(158)))), ((int)(((byte)(11)))));
             this.btnCrearVenta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCrearVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCrearVenta.Location = new System.Drawing.Point(27, 88);
+            this.btnCrearVenta.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCrearVenta.Location = new System.Drawing.Point(40, 155);
+            this.btnCrearVenta.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnCrearVenta.Name = "btnCrearVenta";
-            this.btnCrearVenta.Size = new System.Drawing.Size(128, 58);
+            this.btnCrearVenta.Size = new System.Drawing.Size(192, 102);
             this.btnCrearVenta.TabIndex = 0;
             this.btnCrearVenta.Text = "Crear Venta";
             this.btnCrearVenta.UseVisualStyleBackColor = false;
@@ -120,28 +129,31 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(95)))), ((int)(((byte)(43)))));
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.panelContenedor, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panelLateral, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1200, 797);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(196)))), ((int)(((byte)(69)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1200, 797);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.Name = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
