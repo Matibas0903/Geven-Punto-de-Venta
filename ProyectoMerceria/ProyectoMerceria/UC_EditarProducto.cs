@@ -41,6 +41,7 @@ namespace ProyectoMerceria
             dGridViewProductos.Columns["Producto"].DataPropertyName = "Nombre";
             dGridViewProductos.Columns["Precio"].DefaultCellStyle.Format = "C2";
             dGridViewProductos.Columns["Precio"].DataPropertyName = "Precio";
+            dGridViewProductos.Columns["stock"].DataPropertyName = "Cantidad";
 
             dGridViewProductos.DataSource = productos;
         }
@@ -57,7 +58,8 @@ namespace ProyectoMerceria
                     //MessageBox.Show($"Nombre que llega: {producto.Nombre}");
                     tboxNombreProducto.Text = producto.Nombre;
                     nUDPrecioProducto.Text = producto.Precio.ToString();
-                    LlenarListaProductos();
+                    nUDStock.Text = producto.Cantidad.ToString();
+                LlenarListaProductos();
 
             }
                 else
@@ -80,13 +82,14 @@ namespace ProyectoMerceria
             if (string.IsNullOrWhiteSpace(tboxNombreProducto.Text) ||
                 string.IsNullOrWhiteSpace(nUDPrecioProducto.Text))
             {
-                MessageBox.Show("Por favor, completá todos los campos obligatorios.", "CamposFaltantes!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor, completá todos los campos obligatorios.", "Campos faltantes!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             BE.ProductoBE unProductoBE = new ProductoBE()
             {
                 Nombre = tboxNombreProducto.Text,
                 Precio = precioProducto,
+                Cantidad = nUDStock.Value > 0 ? (int)nUDStock.Value : 0
             };
 
             try
@@ -181,6 +184,11 @@ namespace ProyectoMerceria
                 tBoxBuscarProducto.ForeColor = Color.Gray;//pone el texto por defecto y pone la fuente gris
             }
             LlenarListaProductos();
+        }
+
+        private void UC_EditarProducto_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

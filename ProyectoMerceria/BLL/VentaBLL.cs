@@ -33,6 +33,7 @@ namespace BLL
             {
                 detalle.VentaID = venta_ID;
                 unDetalleVentaDAL.RegistrarDetalleVenta(detalle);
+                DescontarStockVenta(unaVenta);
             }
 
             return venta_ID;
@@ -66,6 +67,18 @@ namespace BLL
             return Ventas;
         }
 
+        private void DescontarStockVenta(VentaBE venta)
+        {
+            ProductoBLL productoBLL = new ProductoBLL();
+
+            foreach (var detalle in venta.DetalleVenta)
+            {
+                productoBLL.DescontarStock(
+                    detalle.Producto,
+                    detalle.Cantidad
+                );
+            }
+        }
 
 
     }

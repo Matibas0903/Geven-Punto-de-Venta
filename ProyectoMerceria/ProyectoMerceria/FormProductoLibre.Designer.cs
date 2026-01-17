@@ -41,7 +41,7 @@
             // 
             this.nUDPrecioProducto.DecimalPlaces = 2;
             this.nUDPrecioProducto.Location = new System.Drawing.Point(123, 137);
-            this.nUDPrecioProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nUDPrecioProducto.Margin = new System.Windows.Forms.Padding(4);
             this.nUDPrecioProducto.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -58,7 +58,7 @@
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.Location = new System.Drawing.Point(123, 263);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(133, 28);
             this.btnCancelar.TabIndex = 79;
@@ -71,9 +71,9 @@
             this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(158)))), ((int)(((byte)(11)))));
             this.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.Location = new System.Drawing.Point(123, 208);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(133, 30);
             this.btnAgregar.TabIndex = 78;
@@ -95,7 +95,7 @@
             // tboxNombreProducto
             // 
             this.tboxNombreProducto.Location = new System.Drawing.Point(123, 50);
-            this.tboxNombreProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tboxNombreProducto.Margin = new System.Windows.Forms.Padding(4);
             this.tboxNombreProducto.Name = "tboxNombreProducto";
             this.tboxNombreProducto.Size = new System.Drawing.Size(132, 22);
             this.tboxNombreProducto.TabIndex = 76;
@@ -124,7 +124,7 @@
             this.Controls.Add(this.lblPrecio);
             this.Controls.Add(this.tboxNombreProducto);
             this.Controls.Add(this.lblNombre);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(394, 365);
             this.MinimizeBox = false;

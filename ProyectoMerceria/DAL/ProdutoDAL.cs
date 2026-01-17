@@ -35,14 +35,15 @@ namespace DAL
             using (SQLiteConnection conn = Conexion.Conectar())
             {
                 string sql = @"
-            INSERT INTO PRODUCTO (NOMBRE, PRECIO)
-            VALUES (@Nombre, @Precio);
+            INSERT INTO PRODUCTO (NOMBRE, PRECIO, CANTIDAD)
+            VALUES (@Nombre, @Precio, @Cantidad);
             SELECT last_insert_rowid();";
 
                 using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@Nombre", unProducto.Nombre);
                     cmd.Parameters.AddWithValue("@Precio", unProducto.Precio);
+                    cmd.Parameters.AddWithValue("@Cantidad", unProducto.Cantidad);
 
                     int idGenerado = Convert.ToInt32(cmd.ExecuteScalar());
                     unProducto.ProductoID = idGenerado;
@@ -52,14 +53,15 @@ namespace DAL
             }
         }
 
-        public void ActualizarProducto(ProductoBE unProducto)
+        public void ActualizarProducto(ProductoBE unProducto, int idProducto)
         {
             using (SQLiteConnection conn = Conexion.Conectar())
             {
                 string sql = @"
             UPDATE PRODUCTO
             SET NOMBRE = @Nombre,
-                PRECIO = @Precio
+                PRECIO = @Precio,
+                CANTIDAD = @Cantidad
             WHERE IDPRODUCTO = @IdProducto
         ";
 
@@ -67,7 +69,8 @@ namespace DAL
                 {
                     cmd.Parameters.AddWithValue("@Nombre", unProducto.Nombre);
                     cmd.Parameters.AddWithValue("@Precio", unProducto.Precio);
-                    cmd.Parameters.AddWithValue("@IdProducto", unProducto.ProductoID);
+                    cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+                    cmd.Parameters.AddWithValue("@Cantidad", unProducto.Cantidad);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -107,13 +110,33 @@ namespace DAL
                             {
                                 ProductoID = Convert.ToInt32(reader["IDPRODUCTO"]),
                                 Nombre = reader["NOMBRE"].ToString(),
-                                Precio = Convert.ToSingle(reader["PRECIO"])
+                                Precio = Convert.ToSingle(reader["PRECIO"]),
+                                Cantidad= Convert.ToInt32(reader["CANTIDAD"])
                             };
                         }
                     }
                 }
             }
             return null;
+        }
+
+        public void DescontarStock(int productoId, int cantidadVendida)
+        {
+            string sql = @"
+               UPDATE PRODUCTO
+               SET CANTIDAD = CANTIDAD - @cantidad
+               WHERE IDPRODUCTO = @id;";
+
+            using (SQLiteConnection conn = Conexion.Conectar())
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@cantidad", cantidadVendida);
+                    cmd.Parameters.AddWithValue("@id", productoId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
 

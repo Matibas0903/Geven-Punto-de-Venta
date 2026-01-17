@@ -56,16 +56,32 @@ namespace ProyectoMerceria
             dGridViewProductos.Columns["Producto"].DataPropertyName = "Nombre";
             dGridViewProductos.Columns["Precio"].DefaultCellStyle.Format = "C2";
             dGridViewProductos.Columns["Precio"].DataPropertyName = "Precio";
-
+            dGridViewProductos.Columns["stock"].DataPropertyName = "Cantidad";
             dGridViewProductos.DataSource = productos;
+
+
+            foreach (DataGridViewRow fila in dGridViewProductos.Rows)
+            {
+                int stock = Convert.ToInt32(fila.Cells["stock"].Value);
+                var btn = (DataGridViewButtonCell)fila.Cells["agregar"];
+
+                if (stock <= 0)
+                {
+                    btn.ReadOnly = true;
+                    btn.Style.ForeColor = Color.Gray;
+                }
+            }
+
         }
         private void dGridViewProductos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
            // MessageBox.Show($"Fila: {e.RowIndex}, Columna: {e.ColumnIndex}");
-            DataGridViewRow fila = dGridViewProductos.Rows[e.RowIndex];
+           // Revisar Excepcion por click en el grid
+       
 
             if (!EsBoton(dGridViewProductos,e)) { return; }
             if (!EsFilaValida(e.RowIndex)) { return; }
+            DataGridViewRow fila = dGridViewProductos.Rows[e.RowIndex];
             if (dGridViewProductos.Columns[e.ColumnIndex].Name == "Editar")
             {
                 int idProducto = Convert.ToInt32(dGridViewProductos.Rows[e.RowIndex].Cells["ProductoID"].Value);
@@ -82,8 +98,20 @@ namespace ProyectoMerceria
 
             }
 
+            if (dGridViewProductos.Columns[e.ColumnIndex].Name == "Agregar")
+            {
+                int stock = Convert.ToInt32(
+                    dGridViewProductos.Rows[e.RowIndex].Cells["stock"].Value
+                );
 
-            if (dGridViewProductos.Rows[e.RowIndex].DataBoundItem is ProductoBE productoSeleccionado)
+                if (stock <= 0)
+                {
+                    MessageBox.Show("Producto sin stock");
+                    return;
+                }
+
+            }
+                if (dGridViewProductos.Rows[e.RowIndex].DataBoundItem is ProductoBE productoSeleccionado)
             {
                 AgregarOActualizarProductoEnVenta(productoSeleccionado.Nombre, productoSeleccionado.Precio, productoSeleccionado.ProductoID);
                 ObtenerTotalVenta();
@@ -118,6 +146,7 @@ namespace ProyectoMerceria
             object objID = fila.Cells["ProductoID"].Value;
             object objNombre = fila.Cells["Producto"].Value;
             object objPrecio = fila.Cells["Precio"].Value;
+            object objCantidad = fila.Cells["stock"].Value;
 
             if (objID == null||objNombre == null || objPrecio == null) 
             {
@@ -346,7 +375,7 @@ namespace ProyectoMerceria
                 };
        
 
-                //creamos una venta y la llenamos, lueo la agregamos a la lista de detalles de venta
+                //creamos una venta y la llenamos, luego la agregamos a la lista de detalles de venta
                 DetalleVentaBE detalle = new DetalleVentaBE()
                 {
                     Producto = producto,
@@ -368,6 +397,8 @@ namespace ProyectoMerceria
             dGridViewVenta.Rows.Clear();
             cBoxMetodoPago.SelectedIndex = -1;
             tBoxTotal.Text = "0.00";
+            LlenarListaProductos();
+
         }
 
         private void btnProductoLibre_Click(object sender, EventArgs e)
@@ -393,6 +424,16 @@ namespace ProyectoMerceria
 
                 ObtenerTotalVenta(); // O lo que uses para recalcular el total
             }
+        }
+
+        private void UC_CrearVenta_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dGridViewProductos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+
         }
     }
 }

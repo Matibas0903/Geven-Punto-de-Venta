@@ -70,6 +70,7 @@
             // PictureLaPuntada
             // 
             this.PictureLaPuntada.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.PictureLaPuntada.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PictureLaPuntada.Image = global::ProyectoMerceria.Properties.Resources.LaPuntadaSinHiloLogo;
             this.PictureLaPuntada.Location = new System.Drawing.Point(40, 6);
             this.PictureLaPuntada.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);

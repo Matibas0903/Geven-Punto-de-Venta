@@ -25,6 +25,7 @@ namespace BLL
                     ProductoID = Convert.ToInt32(Fila["IDPRODUCTO"]),
                     Nombre = Fila["NOMBRE"].ToString(),
                     Precio = float.Parse(Fila["PRECIO"].ToString()),
+                    Cantidad = Convert.ToInt32(Fila["CANTIDAD"])
                 });
             }
             return productos;
@@ -37,7 +38,7 @@ namespace BLL
 
         public void ActualizarProducto(BE.ProductoBE unProducto, int idProducto)
         {
-            unProductoDAL.ActualizarProducto(unProducto);
+            unProductoDAL.ActualizarProducto(unProducto, idProducto);
         }
         public void EliminarProducto(int idProducto)
         {
@@ -47,6 +48,11 @@ namespace BLL
         public ProductoBE ObtenerProductoPorID(int idProducto) 
         {
             return unProductoDAL.ObtenerProductoPorID(idProducto);
+        }
+
+        public void DescontarStock(ProductoBE producto, int cantidadVendida)
+        {
+            unProductoDAL.DescontarStock(producto.ProductoID, cantidadVendida);
         }
 
     }

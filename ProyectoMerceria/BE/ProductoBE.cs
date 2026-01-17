@@ -32,5 +32,13 @@ namespace BE
             set { _precio = value; }
         }
 
+        private int _cantidad;
+
+        public int Cantidad
+        {
+            get { return _cantidad; }
+            set { _cantidad = value; }
+        }
+
     }
 }

@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             this.dGridViewProductos = new System.Windows.Forms.DataGridView();
-            this.Agregar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Editar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.ProductoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCrearVenta = new System.Windows.Forms.Button();
             this.cBoxMetodoPago = new System.Windows.Forms.ComboBox();
             this.dGridViewVenta = new System.Windows.Forms.DataGridView();
@@ -52,6 +47,12 @@
             this.lblMetodoPago = new System.Windows.Forms.Label();
             this.lblCrearVenta = new System.Windows.Forms.Label();
             this.btnProductoLibre = new System.Windows.Forms.Button();
+            this.Agregar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Editar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ProductoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dGridViewProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGridViewVenta)).BeginInit();
             this.SuspendLayout();
@@ -68,11 +69,12 @@
             this.Agregar,
             this.Producto,
             this.Precio,
+            this.stock,
             this.Editar,
             this.ProductoID});
             this.dGridViewProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dGridViewProductos.Location = new System.Drawing.Point(24, 68);
-            this.dGridViewProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dGridViewProductos.Margin = new System.Windows.Forms.Padding(4);
             this.dGridViewProductos.Name = "dGridViewProductos";
             this.dGridViewProductos.ReadOnly = true;
             this.dGridViewProductos.RowHeadersVisible = false;
@@ -82,53 +84,7 @@
             this.dGridViewProductos.Size = new System.Drawing.Size(407, 425);
             this.dGridViewProductos.TabIndex = 0;
             this.dGridViewProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGridViewProductos_CellClick);
-            // 
-            // Agregar
-            // 
-            this.Agregar.HeaderText = "";
-            this.Agregar.MinimumWidth = 6;
-            this.Agregar.Name = "Agregar";
-            this.Agregar.ReadOnly = true;
-            this.Agregar.Text = "+";
-            this.Agregar.UseColumnTextForButtonValue = true;
-            this.Agregar.Width = 20;
-            // 
-            // Producto
-            // 
-            this.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Producto.DataPropertyName = "Producto";
-            this.Producto.HeaderText = "Producto";
-            this.Producto.MinimumWidth = 6;
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            // 
-            // Precio
-            // 
-            this.Precio.DataPropertyName = "Precio";
-            this.Precio.HeaderText = "Precio";
-            this.Precio.MinimumWidth = 6;
-            this.Precio.Name = "Precio";
-            this.Precio.ReadOnly = true;
-            this.Precio.Width = 60;
-            // 
-            // Editar
-            // 
-            this.Editar.HeaderText = "";
-            this.Editar.MinimumWidth = 6;
-            this.Editar.Name = "Editar";
-            this.Editar.ReadOnly = true;
-            this.Editar.Text = "Editar";
-            this.Editar.UseColumnTextForButtonValue = true;
-            this.Editar.Width = 60;
-            // 
-            // ProductoID
-            // 
-            this.ProductoID.HeaderText = "ProductoID";
-            this.ProductoID.MinimumWidth = 6;
-            this.ProductoID.Name = "ProductoID";
-            this.ProductoID.ReadOnly = true;
-            this.ProductoID.Visible = false;
-            this.ProductoID.Width = 125;
+            this.dGridViewProductos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dGridViewProductos_DataBindingComplete);
             // 
             // btnCrearVenta
             // 
@@ -137,7 +93,7 @@
             this.btnCrearVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCrearVenta.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCrearVenta.Location = new System.Drawing.Point(572, 341);
-            this.btnCrearVenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCrearVenta.Margin = new System.Windows.Forms.Padding(4);
             this.btnCrearVenta.Name = "btnCrearVenta";
             this.btnCrearVenta.Size = new System.Drawing.Size(100, 28);
             this.btnCrearVenta.TabIndex = 2;
@@ -148,14 +104,15 @@
             // cBoxMetodoPago
             // 
             this.cBoxMetodoPago.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxMetodoPago.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cBoxMetodoPago.FormattingEnabled = true;
             this.cBoxMetodoPago.Items.AddRange(new object[] {
             "Efectivo",
             "Transferencia"});
             this.cBoxMetodoPago.Location = new System.Drawing.Point(633, 281);
-            this.cBoxMetodoPago.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxMetodoPago.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxMetodoPago.Name = "cBoxMetodoPago";
-            this.cBoxMetodoPago.Size = new System.Drawing.Size(160, 24);
+            this.cBoxMetodoPago.Size = new System.Drawing.Size(160, 25);
             this.cBoxMetodoPago.TabIndex = 3;
             // 
             // dGridViewVenta
@@ -177,7 +134,7 @@
             this.precioUnitario});
             this.dGridViewVenta.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dGridViewVenta.Location = new System.Drawing.Point(475, 42);
-            this.dGridViewVenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dGridViewVenta.Margin = new System.Windows.Forms.Padding(4);
             this.dGridViewVenta.Name = "dGridViewVenta";
             this.dGridViewVenta.ReadOnly = true;
             this.dGridViewVenta.RowHeadersVisible = false;
@@ -254,7 +211,7 @@
             this.tBoxBuscarProducto.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tBoxBuscarProducto.ForeColor = System.Drawing.Color.Gray;
             this.tBoxBuscarProducto.Location = new System.Drawing.Point(24, 36);
-            this.tBoxBuscarProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxBuscarProducto.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxBuscarProducto.Name = "tBoxBuscarProducto";
             this.tBoxBuscarProducto.Size = new System.Drawing.Size(371, 25);
             this.tBoxBuscarProducto.TabIndex = 5;
@@ -281,7 +238,7 @@
             this.btnLimpiarBusqueda.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLimpiarBusqueda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLimpiarBusqueda.Location = new System.Drawing.Point(404, 36);
-            this.btnLimpiarBusqueda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLimpiarBusqueda.Margin = new System.Windows.Forms.Padding(4);
             this.btnLimpiarBusqueda.Name = "btnLimpiarBusqueda";
             this.btnLimpiarBusqueda.Size = new System.Drawing.Size(27, 25);
             this.btnLimpiarBusqueda.TabIndex = 7;
@@ -293,7 +250,7 @@
             // 
             this.tBoxTotal.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tBoxTotal.Location = new System.Drawing.Point(475, 281);
-            this.tBoxTotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxTotal.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxTotal.Name = "tBoxTotal";
             this.tBoxTotal.ReadOnly = true;
             this.tBoxTotal.Size = new System.Drawing.Size(132, 22);
@@ -339,13 +296,69 @@
             this.btnProductoLibre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProductoLibre.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProductoLibre.Location = new System.Drawing.Point(439, 446);
-            this.btnProductoLibre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnProductoLibre.Margin = new System.Windows.Forms.Padding(4);
             this.btnProductoLibre.Name = "btnProductoLibre";
             this.btnProductoLibre.Size = new System.Drawing.Size(119, 47);
             this.btnProductoLibre.TabIndex = 12;
             this.btnProductoLibre.Text = "Producto libre";
             this.btnProductoLibre.UseVisualStyleBackColor = false;
             this.btnProductoLibre.Click += new System.EventHandler(this.btnProductoLibre_Click);
+            // 
+            // Agregar
+            // 
+            this.Agregar.HeaderText = "";
+            this.Agregar.MinimumWidth = 6;
+            this.Agregar.Name = "Agregar";
+            this.Agregar.ReadOnly = true;
+            this.Agregar.Text = "+";
+            this.Agregar.UseColumnTextForButtonValue = true;
+            this.Agregar.Width = 20;
+            // 
+            // Producto
+            // 
+            this.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Producto.DataPropertyName = "Producto";
+            this.Producto.HeaderText = "Producto";
+            this.Producto.MinimumWidth = 6;
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Precio
+            // 
+            this.Precio.DataPropertyName = "Precio";
+            this.Precio.HeaderText = "Precio";
+            this.Precio.MinimumWidth = 6;
+            this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
+            this.Precio.Width = 60;
+            // 
+            // stock
+            // 
+            this.stock.HeaderText = "Stock";
+            this.stock.MinimumWidth = 6;
+            this.stock.Name = "stock";
+            this.stock.ReadOnly = true;
+            this.stock.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.stock.Width = 125;
+            // 
+            // Editar
+            // 
+            this.Editar.HeaderText = "";
+            this.Editar.MinimumWidth = 6;
+            this.Editar.Name = "Editar";
+            this.Editar.ReadOnly = true;
+            this.Editar.Text = "Editar";
+            this.Editar.UseColumnTextForButtonValue = true;
+            this.Editar.Width = 60;
+            // 
+            // ProductoID
+            // 
+            this.ProductoID.HeaderText = "ProductoID";
+            this.ProductoID.MinimumWidth = 6;
+            this.ProductoID.Name = "ProductoID";
+            this.ProductoID.ReadOnly = true;
+            this.ProductoID.Visible = false;
+            this.ProductoID.Width = 125;
             // 
             // UC_CrearVenta
             // 
@@ -364,9 +377,10 @@
             this.Controls.Add(this.cBoxMetodoPago);
             this.Controls.Add(this.btnCrearVenta);
             this.Controls.Add(this.dGridViewProductos);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UC_CrearVenta";
             this.Size = new System.Drawing.Size(808, 527);
+            this.Load += new System.EventHandler(this.UC_CrearVenta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dGridViewProductos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGridViewVenta)).EndInit();
             this.ResumeLayout(false);
@@ -380,11 +394,6 @@
         private System.Windows.Forms.Button btnCrearVenta;
         private System.Windows.Forms.ComboBox cBoxMetodoPago;
         private System.Windows.Forms.DataGridView dGridViewVenta;
-        private System.Windows.Forms.DataGridViewButtonColumn Agregar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
-        private System.Windows.Forms.DataGridViewButtonColumn Editar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductoID;
         private System.Windows.Forms.TextBox tBoxBuscarProducto;
         private System.Windows.Forms.Label lblBuscarProducto;
         private System.Windows.Forms.Button btnLimpiarBusqueda;
@@ -400,5 +409,11 @@
         private System.Windows.Forms.DataGridViewButtonColumn Sumar;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn precioUnitario;
+        private System.Windows.Forms.DataGridViewButtonColumn Agregar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stock;
+        private System.Windows.Forms.DataGridViewButtonColumn Editar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductoID;
     }
 }

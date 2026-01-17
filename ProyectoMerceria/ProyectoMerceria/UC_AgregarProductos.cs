@@ -37,6 +37,7 @@ namespace ProyectoMerceria
             dGridViewProductos.Columns["Producto"].DataPropertyName = "Nombre";
             dGridViewProductos.Columns["Precio"].DefaultCellStyle.Format = "C2";
             dGridViewProductos.Columns["Precio"].DataPropertyName = "Precio";
+            dGridViewProductos.Columns["stock"].DataPropertyName = "Cantidad";
 
             dGridViewProductos.DataSource = productos;
         }
@@ -45,11 +46,11 @@ namespace ProyectoMerceria
         {
             decimal precio = nUDPrecioProducto.Value;
             float precioProducto = (float)precio;
-            string nombreProducto;
+            
             if (string.IsNullOrWhiteSpace(tboxNombreProducto.Text) ||
                 string.IsNullOrWhiteSpace(nUDPrecioProducto.Text)) 
             {
-                MessageBox.Show("Por favor, completá todos los campos obligatorios.", "CamposFaltantes!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor, completá todos los campos obligatorios.", "Campos faltantes!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             BE.ProductoBE unProductoBE = new ProductoBE()
