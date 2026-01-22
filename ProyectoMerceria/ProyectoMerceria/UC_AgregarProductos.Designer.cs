@@ -28,14 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.lblPrecio = new System.Windows.Forms.Label();
             this.tboxNombreProducto = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.dGridViewProductos = new System.Windows.Forms.DataGridView();
+            this.ProductoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nUDPrecioProducto = new System.Windows.Forms.NumericUpDown();
             this.lblAgregarProducto = new System.Windows.Forms.Label();
             this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
@@ -43,10 +47,9 @@
             this.tBoxBuscarProducto = new System.Windows.Forms.TextBox();
             this.nUDStock = new System.Windows.Forms.NumericUpDown();
             this.lblStock = new System.Windows.Forms.Label();
-            this.ProductoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnExcel = new System.Windows.Forms.Button();
+            this.btnImportar = new System.Windows.Forms.Button();
+            this.btnBorrarProductos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGridViewProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDPrecioProducto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDStock)).BeginInit();
@@ -58,7 +61,7 @@
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(513, 356);
+            this.btnCancelar.Location = new System.Drawing.Point(663, 168);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(133, 28);
@@ -73,7 +76,7 @@
             this.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Location = new System.Drawing.Point(513, 304);
+            this.btnAgregar.Location = new System.Drawing.Point(663, 116);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(133, 28);
@@ -86,7 +89,7 @@
             // 
             this.lblPrecio.AutoSize = true;
             this.lblPrecio.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrecio.Location = new System.Drawing.Point(512, 151);
+            this.lblPrecio.Location = new System.Drawing.Point(493, 149);
             this.lblPrecio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(57, 23);
@@ -95,7 +98,7 @@
             // 
             // tboxNombreProducto
             // 
-            this.tboxNombreProducto.Location = new System.Drawing.Point(513, 116);
+            this.tboxNombreProducto.Location = new System.Drawing.Point(494, 114);
             this.tboxNombreProducto.Margin = new System.Windows.Forms.Padding(4);
             this.tboxNombreProducto.Name = "tboxNombreProducto";
             this.tboxNombreProducto.Size = new System.Drawing.Size(132, 22);
@@ -105,7 +108,7 @@
             // 
             this.lblNombre.AutoSize = true;
             this.lblNombre.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombre.Location = new System.Drawing.Point(513, 86);
+            this.lblNombre.Location = new System.Drawing.Point(494, 84);
             this.lblNombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(73, 23);
@@ -119,28 +122,28 @@
             this.dGridViewProductos.AllowUserToResizeColumns = false;
             this.dGridViewProductos.AllowUserToResizeRows = false;
             this.dGridViewProductos.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dGridViewProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dGridViewProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dGridViewProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGridViewProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ProductoID,
             this.Producto,
             this.stock,
             this.Precio});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dGridViewProductos.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dGridViewProductos.DefaultCellStyle = dataGridViewCellStyle2;
             this.dGridViewProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dGridViewProductos.Location = new System.Drawing.Point(47, 116);
             this.dGridViewProductos.Margin = new System.Windows.Forms.Padding(4);
@@ -153,10 +156,44 @@
             this.dGridViewProductos.Size = new System.Drawing.Size(407, 425);
             this.dGridViewProductos.TabIndex = 73;
             // 
+            // ProductoID
+            // 
+            this.ProductoID.HeaderText = "ID";
+            this.ProductoID.MinimumWidth = 6;
+            this.ProductoID.Name = "ProductoID";
+            this.ProductoID.ReadOnly = true;
+            this.ProductoID.Width = 30;
+            // 
+            // Producto
+            // 
+            this.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Producto.DataPropertyName = "Producto";
+            this.Producto.HeaderText = "Producto";
+            this.Producto.MinimumWidth = 6;
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // stock
+            // 
+            this.stock.HeaderText = "Stock";
+            this.stock.MinimumWidth = 6;
+            this.stock.Name = "stock";
+            this.stock.ReadOnly = true;
+            this.stock.Width = 125;
+            // 
+            // Precio
+            // 
+            this.Precio.DataPropertyName = "Precio";
+            this.Precio.HeaderText = "Precio";
+            this.Precio.MinimumWidth = 6;
+            this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
+            this.Precio.Width = 60;
+            // 
             // nUDPrecioProducto
             // 
             this.nUDPrecioProducto.DecimalPlaces = 2;
-            this.nUDPrecioProducto.Location = new System.Drawing.Point(512, 182);
+            this.nUDPrecioProducto.Location = new System.Drawing.Point(493, 180);
             this.nUDPrecioProducto.Margin = new System.Windows.Forms.Padding(4);
             this.nUDPrecioProducto.Maximum = new decimal(new int[] {
             100000,
@@ -221,7 +258,7 @@
             // 
             // nUDStock
             // 
-            this.nUDStock.Location = new System.Drawing.Point(513, 243);
+            this.nUDStock.Location = new System.Drawing.Point(494, 241);
             this.nUDStock.Margin = new System.Windows.Forms.Padding(4);
             this.nUDStock.Maximum = new decimal(new int[] {
             100000,
@@ -236,52 +273,66 @@
             // 
             this.lblStock.AutoSize = true;
             this.lblStock.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStock.Location = new System.Drawing.Point(513, 216);
+            this.lblStock.Location = new System.Drawing.Point(494, 214);
             this.lblStock.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStock.Name = "lblStock";
             this.lblStock.Size = new System.Drawing.Size(79, 23);
             this.lblStock.TabIndex = 89;
             this.lblStock.Text = "Cantidad";
             // 
-            // ProductoID
+            // btnExcel
             // 
-            this.ProductoID.HeaderText = "ID";
-            this.ProductoID.MinimumWidth = 6;
-            this.ProductoID.Name = "ProductoID";
-            this.ProductoID.ReadOnly = true;
-            this.ProductoID.Width = 30;
+            this.btnExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(158)))), ((int)(((byte)(11)))));
+            this.btnExcel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcel.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcel.Location = new System.Drawing.Point(462, 364);
+            this.btnExcel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(133, 28);
+            this.btnExcel.TabIndex = 91;
+            this.btnExcel.Text = "Exportar a Excel";
+            this.btnExcel.UseVisualStyleBackColor = false;
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
             // 
-            // Producto
+            // btnImportar
             // 
-            this.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Producto.DataPropertyName = "Producto";
-            this.Producto.HeaderText = "Producto";
-            this.Producto.MinimumWidth = 6;
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
+            this.btnImportar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(158)))), ((int)(((byte)(11)))));
+            this.btnImportar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnImportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImportar.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImportar.Location = new System.Drawing.Point(462, 400);
+            this.btnImportar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnImportar.Name = "btnImportar";
+            this.btnImportar.Size = new System.Drawing.Size(133, 55);
+            this.btnImportar.TabIndex = 92;
+            this.btnImportar.Text = "Importar desde Excel";
+            this.btnImportar.UseVisualStyleBackColor = false;
+            this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
             // 
-            // stock
+            // btnBorrarProductos
             // 
-            this.stock.HeaderText = "Stock";
-            this.stock.MinimumWidth = 6;
-            this.stock.Name = "stock";
-            this.stock.ReadOnly = true;
-            this.stock.Width = 125;
-            // 
-            // Precio
-            // 
-            this.Precio.DataPropertyName = "Precio";
-            this.Precio.HeaderText = "Precio";
-            this.Precio.MinimumWidth = 6;
-            this.Precio.Name = "Precio";
-            this.Precio.ReadOnly = true;
-            this.Precio.Width = 60;
+            this.btnBorrarProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(158)))), ((int)(((byte)(11)))));
+            this.btnBorrarProductos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBorrarProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBorrarProductos.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBorrarProductos.Location = new System.Drawing.Point(663, 513);
+            this.btnBorrarProductos.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBorrarProductos.Name = "btnBorrarProductos";
+            this.btnBorrarProductos.Size = new System.Drawing.Size(123, 28);
+            this.btnBorrarProductos.TabIndex = 93;
+            this.btnBorrarProductos.Text = "Borrar Productos";
+            this.btnBorrarProductos.UseVisualStyleBackColor = false;
+            this.btnBorrarProductos.Click += new System.EventHandler(this.btnBorrarProductos_Click);
             // 
             // UC_AgregarProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
+            this.Controls.Add(this.btnBorrarProductos);
+            this.Controls.Add(this.btnImportar);
+            this.Controls.Add(this.btnExcel);
             this.Controls.Add(this.nUDStock);
             this.Controls.Add(this.lblStock);
             this.Controls.Add(this.btnLimpiarBusqueda);
@@ -325,5 +376,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.NumericUpDown nUDStock;
         private System.Windows.Forms.Label lblStock;
+        private System.Windows.Forms.Button btnExcel;
+        private System.Windows.Forms.Button btnImportar;
+        private System.Windows.Forms.Button btnBorrarProductos;
     }
 }

@@ -124,6 +124,57 @@ namespace ProyectoMerceria
             LlenarListaProductos();
         }
 
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "Excel (*.xlsx)|*.xlsx";
+            save.FileName = "Productos.xlsx";
 
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                unProductoBLL.ExportarExcel(save.FileName);
+                MessageBox.Show("Exportación realizada con éxito");
+            }
+        }
+
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = "Archivos Excel (*.xlsx)|*.xlsx";
+
+            if (open.ShowDialog() != DialogResult.OK)
+                return;
+
+            try
+            {
+                unProductoBLL.ImportarProductosDesdeExcel(open.FileName);
+
+                MessageBox.Show(
+                    "Importación realizada correctamente",
+                    "Éxito",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Error al importar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
+            LlenarListaProductos();
+        }
+
+        private void btnBorrarProductos_Click(object sender, EventArgs e)
+        {
+            var formLibre = new FormBorrarProductos();
+            if (formLibre.ShowDialog() == DialogResult.OK) 
+            {
+               LlenarListaProductos();
+            }
+        }
     }
 }

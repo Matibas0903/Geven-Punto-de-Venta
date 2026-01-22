@@ -139,6 +139,54 @@ namespace DAL
             }
         }
 
+        public bool ExisteProductoPorNombre(string nombre)
+        {
+            string sql = "SELECT COUNT(*) FROM PRODUCTO WHERE NOMBRE = @nombre";
+
+            using (SQLiteConnection conn = Conexion.Conectar()) { 
+            using (var cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+                    return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+                }
+            }
+        }
+
+        public int ObtenerIdProductoPorNombre(string nombre)
+        {
+            
+                string sql = "SELECT IDPRODUCTO FROM PRODUCTO WHERE NOMBRE = @nombre";
+
+            using (SQLiteConnection conn = Conexion.Conectar())
+            {
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+
+                    object resultado = cmd.ExecuteScalar();
+
+                    if (resultado == null || resultado == DBNull.Value)
+                        return -1;
+
+                    return Convert.ToInt32(resultado);
+                }
+            }
+        }
+
+        public int EliminarTodosLosProductos()
+        {
+            using (SQLiteConnection conn = Conexion.Conectar())
+            {
+                string sql = "DELETE FROM PRODUCTO";
+
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                {
+                    return cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
 
     }
 }
