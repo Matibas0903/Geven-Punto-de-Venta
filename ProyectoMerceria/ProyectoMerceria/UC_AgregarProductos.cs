@@ -129,11 +129,17 @@ namespace ProyectoMerceria
             SaveFileDialog save = new SaveFileDialog();
             save.Filter = "Excel (*.xlsx)|*.xlsx";
             save.FileName = "Productos.xlsx";
-
-            if (save.ShowDialog() == DialogResult.OK)
+            try
             {
-                unProductoBLL.ExportarExcel(save.FileName);
-                MessageBox.Show("Exportación realizada con éxito");
+                if (save.ShowDialog() == DialogResult.OK)
+                {
+                    unProductoBLL.ExportarExcel(save.FileName);
+                    MessageBox.Show("Exportación realizada con éxito");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al exportar: " + ex.Message);
             }
         }
 

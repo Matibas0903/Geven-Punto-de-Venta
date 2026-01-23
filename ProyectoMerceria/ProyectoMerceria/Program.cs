@@ -17,9 +17,10 @@ namespace ProyectoMerceria
         [STAThread]
         static void Main()
         {
-
-            // Instalar LocalDB si no está
-            string rutaInstalador = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SqlLocalDB.msi");
+            try
+            {
+                // Instalar LocalDB si no está
+                string rutaInstalador = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SqlLocalDB.msi");
 
             if (!LocalDBInstalada())
             {
@@ -45,6 +46,15 @@ namespace ProyectoMerceria
             {
                 string rutaLocalDB = Environment.ExpandEnvironmentVariables(@"%ProgramFiles%\Microsoft SQL Server\110\LocalDB\Binn\SqlLocalDB.exe");
                 return File.Exists(rutaLocalDB);
+            } }
+            catch (Exception ex)
+    {
+                MessageBox.Show(
+                    ex.ToString(),
+                    "Error al iniciar la aplicación",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
     }

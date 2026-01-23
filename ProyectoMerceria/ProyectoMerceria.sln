@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36109.1
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11408.102 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectoMerceria", "ProyectoMerceria\ProyectoMerceria.csproj", "{686945D8-5F36-4D2B-ABFA-4F2980C7B8A1}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{BE974B19-2DBC-4C53-BC00-E2E8A8DC4C6A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BE", "BE\BE.csproj", "{8BFE5AF3-DBBF-40CD-8328-6F60FE8F9874}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Geven.Setup", "Geven.Setup\Geven.Setup.vdproj", "{35548A6E-49E8-AF7C-1D29-67EC6815F5AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,8 @@ Global
 		{8BFE5AF3-DBBF-40CD-8328-6F60FE8F9874}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BFE5AF3-DBBF-40CD-8328-6F60FE8F9874}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BFE5AF3-DBBF-40CD-8328-6F60FE8F9874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35548A6E-49E8-AF7C-1D29-67EC6815F5AA}.Debug|Any CPU.ActiveCfg = Debug
+		{35548A6E-49E8-AF7C-1D29-67EC6815F5AA}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

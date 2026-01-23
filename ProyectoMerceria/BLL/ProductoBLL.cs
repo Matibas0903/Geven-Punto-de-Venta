@@ -87,15 +87,15 @@ namespace BLL
                     ruta,
                     FileMode.Open,
                     FileAccess.Read,
-                    FileShare.None)) // 🔴 nadie más puede usarlo
+                    FileShare.None))
                 {
-                    // Si entra acá, NO está abierto
+                    
                 }
                 return false;
             }
             catch (IOException)
             {
-                return true; // Está abierto o bloqueado
+                return true; 
             }
         }
 
@@ -153,18 +153,30 @@ namespace BLL
             }
         }
 
-        public void ExportarExcel(string rutaCarpeta)
+        public void ExportarExcel(string ruta)
         {
-            if (string.IsNullOrWhiteSpace(rutaCarpeta))
-                throw new Exception("La ruta del backup no es válida.");
+            if (string.IsNullOrWhiteSpace(ruta))
+                throw new Exception("La ruta no es válida.");
 
-            if (!Directory.Exists(rutaCarpeta))
-                throw new Exception("La carpeta seleccionada no existe.");
+            string rutaArchivo;
 
-            string rutaArchivo = Path.Combine(
-                rutaCarpeta,
-                $"backup_productos_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx"
-            );
+            
+            if (File.Exists(ruta) && Path.GetExtension(ruta).ToLower() == ".xlsx")
+            {
+                rutaArchivo = ruta;
+            }
+
+            else if (Directory.Exists(ruta))
+            {
+                rutaArchivo = Path.Combine(
+                    ruta,
+                    $"backup_productos_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx"
+                );
+            }
+            else
+            {
+                throw new Exception("La ruta seleccionada no existe.");
+            }
 
             List<BE.ProductoBE> productos = ObtenerProductos();
 
