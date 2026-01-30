@@ -14,22 +14,20 @@ namespace ProyectoMerceria
 {
     public partial class UC_AgregarProductos : UserControl
     {
-        List<BE.ProductoBE> productos = new List<BE.ProductoBE>();
+      
         private List<ProductoBE> listaOriginalProductos;
         BLL.ProductoBLL unProductoBLL = new BLL.ProductoBLL();
         public UC_AgregarProductos()
         {
             InitializeComponent();
             LlenarListaProductos();
-            listaOriginalProductos = unProductoBLL.ObtenerProductos();
-            dGridViewProductos.DataSource = listaOriginalProductos;
+            
           
         }
 
         public void LlenarListaProductos()
         {
-
-            productos = unProductoBLL.ObtenerProductos();
+            listaOriginalProductos = unProductoBLL.ObtenerProductos();
 
             dGridViewProductos.AutoGenerateColumns = false;
 
@@ -39,24 +37,28 @@ namespace ProyectoMerceria
             dGridViewProductos.Columns["Precio"].DataPropertyName = "Precio";
             dGridViewProductos.Columns["stock"].DataPropertyName = "Cantidad";
 
-            dGridViewProductos.DataSource = productos;
+            dGridViewProductos.DataSource = listaOriginalProductos;
         }
+
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            decimal precio = nUDPrecioProducto.Value;
-            float precioProducto = (float)precio;
+          
             
             if (string.IsNullOrWhiteSpace(tboxNombreProducto.Text) ||
-                string.IsNullOrWhiteSpace(nUDPrecioProducto.Text)) 
+                nUDPrecioProducto.Value <= 0 || nUDStock.Value <= 0) 
             {
                 MessageBox.Show("Por favor, completá todos los campos obligatorios.", "Campos faltantes!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+              decimal precio = nUDPrecioProducto.Value;
+            float precioProducto = (float)precio;
+            int stock =  Convert.ToInt32(nUDStock.Value);
             BE.ProductoBE unProductoBE = new ProductoBE()
             {
                 Nombre = tboxNombreProducto.Text,
                 Precio = precioProducto,
+                Cantidad = stock
             };
 
             try
@@ -101,7 +103,7 @@ namespace ProyectoMerceria
             tBoxBuscarProducto.Text = "Buscar por \"Nombre\"";
             tBoxBuscarProducto.ForeColor = Color.Gray;
 
-            LlenarListaProductos();
+            dGridViewProductos.DataSource = listaOriginalProductos;
         }
 
         private void tBoxBuscarProducto_Enter(object sender, EventArgs e)
@@ -180,6 +182,40 @@ namespace ProyectoMerceria
             if (formLibre.ShowDialog() == DialogResult.OK) 
             {
                LlenarListaProductos();
+            }
+        }
+        private bool EsBoton(DataGridView grid, DataGridViewCellEventArgs e)
+        {
+            //responde si se toco una columna de botones o no
+            return grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn;
+        }
+
+        private bool EsFilaValida(int rowIndex)
+        {
+            //valida que no haya tocado un encabezado
+            return rowIndex >= 0;
+        }
+
+        private void dGridViewProductos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!EsBoton(dGridViewProductos, e)) { return; }
+            if (!EsFilaValida(e.RowIndex)) { return; }
+            DataGridViewRow fila = dGridViewProductos.Rows[e.RowIndex];
+
+            if (dGridViewProductos.Columns[e.ColumnIndex].Name == "editar")
+            {
+                int idProducto = Convert.ToInt32(dGridViewProductos.Rows[e.RowIndex].Cells["ProductoID"].Value);
+                var principal = this.FindForm() as Form1;
+                if (principal != null)
+                {   //pasa el id como parametro para encontrar el producto
+                    principal.MostrarEditarProducto(idProducto);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("No se encontro el form");
+                }
+
             }
         }
     }

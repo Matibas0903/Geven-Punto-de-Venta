@@ -36,10 +36,6 @@
             this.tboxNombreProducto = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.dGridViewProductos = new System.Windows.Forms.DataGridView();
-            this.ProductoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nUDPrecioProducto = new System.Windows.Forms.NumericUpDown();
             this.lblAgregarProducto = new System.Windows.Forms.Label();
             this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
@@ -50,6 +46,11 @@
             this.btnExcel = new System.Windows.Forms.Button();
             this.btnImportar = new System.Windows.Forms.Button();
             this.btnBorrarProductos = new System.Windows.Forms.Button();
+            this.ProductoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.editar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dGridViewProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDPrecioProducto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDStock)).BeginInit();
@@ -135,7 +136,8 @@
             this.ProductoID,
             this.Producto,
             this.stock,
-            this.Precio});
+            this.Precio,
+            this.editar});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -155,40 +157,7 @@
             this.dGridViewProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dGridViewProductos.Size = new System.Drawing.Size(407, 425);
             this.dGridViewProductos.TabIndex = 73;
-            // 
-            // ProductoID
-            // 
-            this.ProductoID.HeaderText = "ID";
-            this.ProductoID.MinimumWidth = 6;
-            this.ProductoID.Name = "ProductoID";
-            this.ProductoID.ReadOnly = true;
-            this.ProductoID.Width = 30;
-            // 
-            // Producto
-            // 
-            this.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Producto.DataPropertyName = "Producto";
-            this.Producto.HeaderText = "Producto";
-            this.Producto.MinimumWidth = 6;
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            // 
-            // stock
-            // 
-            this.stock.HeaderText = "Stock";
-            this.stock.MinimumWidth = 6;
-            this.stock.Name = "stock";
-            this.stock.ReadOnly = true;
-            this.stock.Width = 125;
-            // 
-            // Precio
-            // 
-            this.Precio.DataPropertyName = "Precio";
-            this.Precio.HeaderText = "Precio";
-            this.Precio.MinimumWidth = 6;
-            this.Precio.Name = "Precio";
-            this.Precio.ReadOnly = true;
-            this.Precio.Width = 60;
+            this.dGridViewProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGridViewProductos_CellClick);
             // 
             // nUDPrecioProducto
             // 
@@ -325,6 +294,52 @@
             this.btnBorrarProductos.UseVisualStyleBackColor = false;
             this.btnBorrarProductos.Click += new System.EventHandler(this.btnBorrarProductos_Click);
             // 
+            // ProductoID
+            // 
+            this.ProductoID.HeaderText = "ID";
+            this.ProductoID.MinimumWidth = 6;
+            this.ProductoID.Name = "ProductoID";
+            this.ProductoID.ReadOnly = true;
+            this.ProductoID.Width = 30;
+            // 
+            // Producto
+            // 
+            this.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Producto.DataPropertyName = "Producto";
+            this.Producto.HeaderText = "Producto";
+            this.Producto.MinimumWidth = 6;
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // stock
+            // 
+            this.stock.HeaderText = "Stock";
+            this.stock.MinimumWidth = 6;
+            this.stock.Name = "stock";
+            this.stock.ReadOnly = true;
+            this.stock.Width = 125;
+            // 
+            // Precio
+            // 
+            this.Precio.DataPropertyName = "Precio";
+            this.Precio.HeaderText = "Precio";
+            this.Precio.MinimumWidth = 6;
+            this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
+            this.Precio.Width = 60;
+            // 
+            // editar
+            // 
+            this.editar.FillWeight = 50F;
+            this.editar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editar.HeaderText = "";
+            this.editar.MinimumWidth = 6;
+            this.editar.Name = "editar";
+            this.editar.ReadOnly = true;
+            this.editar.Text = "Editar";
+            this.editar.UseColumnTextForButtonValue = true;
+            this.editar.Width = 50;
+            // 
             // UC_AgregarProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -370,14 +385,15 @@
         private System.Windows.Forms.Button btnLimpiarBusqueda;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tBoxBuscarProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductoID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stock;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.NumericUpDown nUDStock;
         private System.Windows.Forms.Label lblStock;
         private System.Windows.Forms.Button btnExcel;
         private System.Windows.Forms.Button btnImportar;
         private System.Windows.Forms.Button btnBorrarProductos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductoID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stock;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
+        private System.Windows.Forms.DataGridViewButtonColumn editar;
     }
 }

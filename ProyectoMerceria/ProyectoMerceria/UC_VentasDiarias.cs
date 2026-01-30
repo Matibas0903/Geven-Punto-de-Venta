@@ -87,7 +87,7 @@ namespace ProyectoMerceria
             { return; }
             if (!EsBoton(dGridViewVentasDiarias, e))
             {
-                MessageBox.Show("la columna no es una boton");
+  
                 return;
             }
 

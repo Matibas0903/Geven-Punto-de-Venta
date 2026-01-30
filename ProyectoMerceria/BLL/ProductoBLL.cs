@@ -122,8 +122,26 @@ namespace BLL
                     
                     if (fila.Cell(2).IsEmpty())
                         continue;
+                    string nombre = fila.Cell(2).GetValue<string>().Trim();
 
-                    
+                    // Precio
+                    if (fila.Cell(3).IsEmpty())
+                        continue;
+
+                    if (!float.TryParse(fila.Cell(3).GetValue<string>(), out float precio))
+                        continue;
+
+                    // Cantidad
+                    if (fila.Cell(4).IsEmpty())
+                        continue;
+
+                    if (!int.TryParse(fila.Cell(4).GetValue<string>(), out int cantidad))
+                        continue;
+
+                    if (precio <= 0 || cantidad < 0)
+                        continue;
+
+
                     ProductoBE producto = new ProductoBE
                     {
                         Nombre = fila.Cell(2).GetValue<string>().Trim(),
@@ -152,30 +170,36 @@ namespace BLL
                 }
             }
         }
-
+                
         public void ExportarExcel(string ruta)
         {
             if (string.IsNullOrWhiteSpace(ruta))
                 throw new Exception("La ruta no es válida.");
 
+            ruta = ruta.Trim().Trim('"');
+
             string rutaArchivo;
 
-            
-            if (File.Exists(ruta) && Path.GetExtension(ruta).ToLower() == ".xlsx")
+
+            if (Path.GetExtension(ruta).ToLower() == ".xlsx")
             {
+                string carpeta = Path.GetDirectoryName(ruta);
+
+                if (string.IsNullOrWhiteSpace(carpeta) || !Directory.Exists(carpeta))
+                    throw new Exception("La carpeta seleccionada no existe.");
+
                 rutaArchivo = ruta;
             }
-
-            else if (Directory.Exists(ruta))
+          
+            else
             {
+                if (!Directory.Exists(ruta))
+                    throw new Exception("La carpeta seleccionada no existe.");
+
                 rutaArchivo = Path.Combine(
                     ruta,
                     $"backup_productos_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx"
                 );
-            }
-            else
-            {
-                throw new Exception("La ruta seleccionada no existe.");
             }
 
             List<BE.ProductoBE> productos = ObtenerProductos();

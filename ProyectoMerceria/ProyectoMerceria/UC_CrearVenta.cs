@@ -14,7 +14,7 @@ namespace ProyectoMerceria
 {
     public partial class UC_CrearVenta : UserControl
     {
-        List<BE.ProductoBE> productos = new List<BE.ProductoBE>();
+       
         private List<ProductoBE> listaOriginalProductos;
         BLL.ProductoBLL unProductoBLL = new BLL.ProductoBLL();
         private VentaBE unaVenta = new VentaBE(); 
@@ -23,8 +23,8 @@ namespace ProyectoMerceria
         {
             InitializeComponent();
             LlenarListaProductos();
-            listaOriginalProductos = unProductoBLL.ObtenerProductos();
-            dGridViewProductos.DataSource = listaOriginalProductos;
+           
+            
             ObtenerTotalVenta();
             dGridViewVenta.Columns["Valor"].DefaultCellStyle.Format = "C2";
 
@@ -47,8 +47,8 @@ namespace ProyectoMerceria
       
         public void LlenarListaProductos() 
         {
-           
-            productos = unProductoBLL.ObtenerProductos();
+
+            listaOriginalProductos = unProductoBLL.ObtenerProductos();
 
             dGridViewProductos.AutoGenerateColumns = false;
 
@@ -57,7 +57,8 @@ namespace ProyectoMerceria
             dGridViewProductos.Columns["Precio"].DefaultCellStyle.Format = "C2";
             dGridViewProductos.Columns["Precio"].DataPropertyName = "Precio";
             dGridViewProductos.Columns["stock"].DataPropertyName = "Cantidad";
-            dGridViewProductos.DataSource = productos;
+
+            dGridViewProductos.DataSource = listaOriginalProductos;
 
 
             foreach (DataGridViewRow fila in dGridViewProductos.Rows)
@@ -75,28 +76,13 @@ namespace ProyectoMerceria
         }
         private void dGridViewProductos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-           // MessageBox.Show($"Fila: {e.RowIndex}, Columna: {e.ColumnIndex}");
-           // Revisar Excepcion por click en el grid
+           
        
 
             if (!EsBoton(dGridViewProductos,e)) { return; }
             if (!EsFilaValida(e.RowIndex)) { return; }
             DataGridViewRow fila = dGridViewProductos.Rows[e.RowIndex];
-            if (dGridViewProductos.Columns[e.ColumnIndex].Name == "Editar")
-            {
-                int idProducto = Convert.ToInt32(dGridViewProductos.Rows[e.RowIndex].Cells["ProductoID"].Value);
-                var principal = this.FindForm() as Form1;
-                if (principal != null)
-                {   //pasa el id como parametro para encontrar el producto
-                    principal.MostrarEditarProducto(idProducto);
-                    return;
-                }
-                else
-                {
-                    MessageBox.Show("No se encontro el form");
-                }
-
-            }
+           
 
             if (dGridViewProductos.Columns[e.ColumnIndex].Name == "Agregar")
             {
@@ -137,28 +123,7 @@ namespace ProyectoMerceria
             return rowIndex >= 0;
         }
 
-        private bool ObtenerProducto(DataGridViewRow fila, out string nombre, out float precio, out int id)//instancio nombre y precio como parametros de salida
-        {
-            nombre = string.Empty;
-            precio = 0;
-            id = 0;
-
-            object objID = fila.Cells["ProductoID"].Value;
-            object objNombre = fila.Cells["Producto"].Value;
-            object objPrecio = fila.Cells["Precio"].Value;
-            object objCantidad = fila.Cells["stock"].Value;
-
-            if (objID == null||objNombre == null || objPrecio == null) 
-            {
-                return false;
-            }
-
-            nombre = objNombre.ToString();
-            id = int.Parse(objID.ToString());
-            return float.TryParse(objPrecio.ToString(), out precio);//usu try parse(en lugar de parse para que devuelva un valor bool)
-
-        }
-
+       
         private void AgregarOActualizarProductoEnVenta(string nombre, float precio, int id)
         {
             cantidad = 1;
@@ -198,7 +163,7 @@ namespace ProyectoMerceria
             { return; }
             if (!EsBoton(dGridViewVenta, e)) 
             {
-                MessageBox.Show("la columna no es una boton");
+            
                 return;}
 
             DataGridViewRow fila = dGridViewVenta.Rows[e.RowIndex];
@@ -367,9 +332,14 @@ namespace ProyectoMerceria
                 float subtotal = float.Parse(fila.Cells["Valor"].Value.ToString());
                 float precioUnitario = subtotal / cantidad;
 
+                int productoIdUI = Convert.ToInt32(fila.Cells["ID"].Value);
+
+                // si es producto libre (ID negativo), usamos ID = 0
+                int productoId = productoIdUI < 0 ? 0 : productoIdUI;
+
                 ProductoBE producto = new ProductoBE()
                 {
-                    ProductoID = int.Parse(fila.Cells["ID"].Value.ToString()),
+                    ProductoID = productoId,
                     Nombre = fila.Cells["NombreProducto"].Value.ToString(),
                     Precio = precioUnitario
                 };
@@ -422,7 +392,7 @@ namespace ProyectoMerceria
 
                 );
 
-                ObtenerTotalVenta(); // O lo que uses para recalcular el total
+                ObtenerTotalVenta();
             }
         }
 

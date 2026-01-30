@@ -18,7 +18,7 @@ namespace DAL
 
             using (SQLiteConnection conn = Conexion.Conectar())
             {
-                string sql = "SELECT * FROM PRODUCTO";
+                string sql = "SELECT * FROM PRODUCTO WHERE IDPRODUCTO > 0";
 
                 using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
@@ -177,7 +177,7 @@ namespace DAL
         {
             using (SQLiteConnection conn = Conexion.Conectar())
             {
-                string sql = "DELETE FROM PRODUCTO";
+                string sql = "DELETE FROM PRODUCTO WHERE IDPRODUCTO <> 0";
 
                 using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
                 {

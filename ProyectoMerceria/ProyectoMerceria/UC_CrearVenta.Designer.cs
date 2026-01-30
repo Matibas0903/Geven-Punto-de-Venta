@@ -51,7 +51,6 @@
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Editar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ProductoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dGridViewProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGridViewVenta)).BeginInit();
@@ -70,7 +69,6 @@
             this.Producto,
             this.Precio,
             this.stock,
-            this.Editar,
             this.ProductoID});
             this.dGridViewProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dGridViewProductos.Location = new System.Drawing.Point(24, 68);
@@ -92,7 +90,7 @@
             this.btnCrearVenta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCrearVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCrearVenta.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCrearVenta.Location = new System.Drawing.Point(572, 341);
+            this.btnCrearVenta.Location = new System.Drawing.Point(572, 351);
             this.btnCrearVenta.Margin = new System.Windows.Forms.Padding(4);
             this.btnCrearVenta.Name = "btnCrearVenta";
             this.btnCrearVenta.Size = new System.Drawing.Size(100, 28);
@@ -104,7 +102,7 @@
             // cBoxMetodoPago
             // 
             this.cBoxMetodoPago.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cBoxMetodoPago.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cBoxMetodoPago.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cBoxMetodoPago.FormattingEnabled = true;
             this.cBoxMetodoPago.Items.AddRange(new object[] {
             "Efectivo",
@@ -112,7 +110,7 @@
             this.cBoxMetodoPago.Location = new System.Drawing.Point(633, 281);
             this.cBoxMetodoPago.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxMetodoPago.Name = "cBoxMetodoPago";
-            this.cBoxMetodoPago.Size = new System.Drawing.Size(160, 25);
+            this.cBoxMetodoPago.Size = new System.Drawing.Size(160, 31);
             this.cBoxMetodoPago.TabIndex = 3;
             // 
             // dGridViewVenta
@@ -249,11 +247,12 @@
             // tBoxTotal
             // 
             this.tBoxTotal.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tBoxTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tBoxTotal.Location = new System.Drawing.Point(475, 281);
             this.tBoxTotal.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxTotal.Name = "tBoxTotal";
             this.tBoxTotal.ReadOnly = true;
-            this.tBoxTotal.Size = new System.Drawing.Size(132, 22);
+            this.tBoxTotal.Size = new System.Drawing.Size(132, 27);
             this.tBoxTotal.TabIndex = 8;
             // 
             // lblTotal
@@ -341,16 +340,6 @@
             this.stock.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.stock.Width = 125;
             // 
-            // Editar
-            // 
-            this.Editar.HeaderText = "";
-            this.Editar.MinimumWidth = 6;
-            this.Editar.Name = "Editar";
-            this.Editar.ReadOnly = true;
-            this.Editar.Text = "Editar";
-            this.Editar.UseColumnTextForButtonValue = true;
-            this.Editar.Width = 60;
-            // 
             // ProductoID
             // 
             this.ProductoID.HeaderText = "ProductoID";
@@ -413,7 +402,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn stock;
-        private System.Windows.Forms.DataGridViewButtonColumn Editar;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductoID;
     }
 }

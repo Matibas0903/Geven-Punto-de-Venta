@@ -33,9 +33,14 @@ namespace BLL
             {
                 detalle.VentaID = venta_ID;
                 unDetalleVentaDAL.RegistrarDetalleVenta(detalle);
-                DescontarStockVenta(unaVenta);
-            }
 
+                if (detalle.Producto.ProductoID > 0)
+                {
+                    DescontarStockDetalle(detalle);
+                }
+
+            }
+           
             return venta_ID;
         }
 
@@ -67,17 +72,17 @@ namespace BLL
             return Ventas;
         }
 
-        private void DescontarStockVenta(VentaBE venta)
+        private void DescontarStockDetalle(DetalleVentaBE detalle)
         {
             ProductoBLL productoBLL = new ProductoBLL();
 
-            foreach (var detalle in venta.DetalleVenta)
-            {
-                productoBLL.DescontarStock(
-                    detalle.Producto,
-                    detalle.Cantidad
-                );
-            }
+            if (detalle.Producto.ProductoID < 0)
+                return;
+
+            productoBLL.DescontarStock(
+                detalle.Producto,
+                detalle.Cantidad
+            );
         }
 
 
